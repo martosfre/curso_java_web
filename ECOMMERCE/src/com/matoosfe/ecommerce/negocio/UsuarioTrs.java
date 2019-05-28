@@ -13,8 +13,7 @@ import com.matoosfe.ecommerce.modelo.Usuario;
 public class UsuarioTrs {
 
 	public Usuario validarUsuario(String nombreUsuario, String claveUsuario) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Usuario();
 	}
 
 }

@@ -45,7 +45,8 @@ public class ServletLogin extends HttpServlet {
 		UsuarioTrs adminUsu = new UsuarioTrs();
 		Usuario usu = adminUsu.validarUsuario(nombreUsuario, claveUsuario);
 		if(usu != null) {
-			//Reenviar al Menú
+			//Redirecciona.
+			request.getRequestDispatcher("./pages/menu.html").forward(request, response);
 		}else {
 			//Mensaje Credenciales Incorrectas
 			//3.Recuperar el escritor
