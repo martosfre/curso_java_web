@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.matoosfe.ecommerce.modelo.Usuario;
 import com.matoosfe.ecommerce.negocio.UsuarioTrs;
@@ -37,7 +38,7 @@ public class ServletLogin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. Recuperar datos enviados
+		//1. Recuperar datos enviados en un request (página web o una url dinámica)
 		String nombreUsuario = request.getParameter("txtNomUsu"); //valor atributo name de su componente html
 		String claveUsuario = request.getParameter("ptxtClaUsu");
 		
@@ -45,8 +46,16 @@ public class ServletLogin extends HttpServlet {
 		UsuarioTrs adminUsu = new UsuarioTrs();
 		Usuario usu = adminUsu.validarUsuario(nombreUsuario, claveUsuario);
 		if(usu != null) {
-			//Redirecciona.
-			request.getRequestDispatcher("./pages/menu.html").forward(request, response);
+			//Almacena el usuario en sesión
+			HttpSession sesion = request.getSession();
+			sesion.setAttribute("usuario", usu);
+			
+			//Redirecciona a un Servlet para mostrar un  menu
+			//request.getRequestDispatcher("./bzx123").forward(request, response);
+			
+			//Redireccionar a una página JSP
+			request.getRequestDispatcher("./pages/menu.jsp").forward(request, response);
+			
 		}else {
 			//Mensaje Credenciales Incorrectas
 			//3.Recuperar el escritor
