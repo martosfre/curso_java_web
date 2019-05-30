@@ -19,12 +19,12 @@
 			<table>
 				<tr>
 					<%-- Directiva de Expresión --%>
-					<td><img src="./resources/img/imgBannerEcommerce800x150.png" /></td>
+					<td><img src="/ECOMMERCE/resources/img/imgBannerEcommerce800x150.png" /></td>
 					<td><div
 							style="background-color: #e6e6e6; height: 86px; padding-top: 65px;">
 							<label><b>Usuario:<%=session.getAttribute("usuario")%></b></label>
 							<br></br>
-							<a href="./abz333">Salir</a>
+							<a href="/ECOMMERCE/abz333">Salir</a>
 						</div>
 					</td>
 				</tr>

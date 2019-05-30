@@ -26,6 +26,7 @@ public class ServletLogin extends HttpServlet {
     public ServletLogin() {
         
     }
+    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -58,13 +59,15 @@ public class ServletLogin extends HttpServlet {
 			
 		}else {
 			//Mensaje Credenciales Incorrectas
-			//3.Recuperar el escritor
+			//1.Recuperar el escritor
 			PrintWriter escritor = response.getWriter();
-			//4.Escribir contenido
+			//2.Setear el tipo de contenido
+			response.setContentType("text/html");//Si no se coloca va por defecto text/html
+			//3.Escribir contenido
 			escritor.print("<b><label>Credenciales Incorrectas!!!</label></b>");
-			//5.Cerrar el escritor
+			//4.Cerrar el escritor
 			escritor.close();
 		}
 	}
-
+	
 }

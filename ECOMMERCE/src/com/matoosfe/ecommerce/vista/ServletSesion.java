@@ -31,7 +31,7 @@ public class ServletSesion extends HttpServlet {
 		HttpSession sesion = request.getSession();
 		sesion.invalidate();
 		
-		request.getRequestDispatcher("./login.html").forward(request, response);
+		response.sendRedirect("./login.html");
 		
 	}
 
