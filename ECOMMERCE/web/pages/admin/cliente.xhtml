@@ -10,15 +10,36 @@
 <h:body>
 	<h:form>
 		<!-- Componente para organizar elementos -->
-		<h:panelGrid id="panGriDatCli" columns="3">
+		<h:panelGrid id="panGriDatCli" columns="4" border="1">
 			<h:outputLabel value="Nombre:" />
+			<h:inputText id="txtNomCli" value="#{clienteBean.cliente.nombrePer}" required="true"
+				requiredMessage="Nombre requerido" maxlength="25" />
+
 			<h:outputLabel value="Apellido:" />
+			<h:inputText id="txtApeCli" value="#{clienteBean.cliente.apellidoPer}" required="true"
+				requiredMessage="Apellido requerido" maxlength="25" />
+
 			<h:outputLabel value="Identificación:" />
+			<h:inputText id="txtIdeCli" value="#{clienteBean.cliente.identificacionPer}" required="true"
+				requiredMessage="Identificación requerido" maxlength="13" />
+
 			<h:outputLabel value="Fecha Nacimiento:" />
+			<h:inputText id="txtFecCli" value="#{clienteBean.cliente.fechaNacPer}" />
+
 			<h:outputLabel value="Dirección:" />
+			<h:inputTextarea id="txaDirCli" value="#{clienteBean.cliente.direccionPer}" required="true"
+				requiredMessage="Dirección requerida" />
+
 			<h:outputLabel value="Teléfono:" />
+			<h:inputText id="txtTelCli" value="#{clienteBean.cliente.telefonoPer}" required="true"
+				requiredMessage="Teléfono requerido" maxlength="10" />
+
 			<h:outputLabel value="Correo:" />
+			<h:inputText id="txtCorCli" value="#{clienteBean.cliente.correoPer}" required="true"
+				requiredMessage="Correo requerido" maxlength="45" />
+
 			<h:outputLabel value="Couta:" />
+			<h:inputText id="txtCuoCli" value="#{clienteBean.cliente.cuotaVenCli}" />
 		</h:panelGrid>
 	</h:form>
 </h:body>
