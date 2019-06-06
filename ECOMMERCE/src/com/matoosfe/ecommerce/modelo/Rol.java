@@ -1,5 +1,5 @@
 package com.matoosfe.ecommerce.modelo;
-// Generated 03/06/2019 20:42:35 by Hibernate Tools 5.2.12.Final
+// Generated 05/06/2019 19:11:01 by Hibernate Tools 5.2.12.Final
 
 import java.util.HashSet;
 import java.util.Set;
