@@ -3,8 +3,10 @@
  */
 package com.matoosfe.ecommerce.vista.beans;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import com.matoosfe.ecommerce.modelo.Cliente;
 import com.matoosfe.ecommerce.negocio.ClienteTrs;
@@ -49,9 +51,18 @@ public class ClienteBean {
 	public String guardar() {
 		try {
 			String mensaje = adminCliente.guardar(cliente);
-			System.out.println(mensaje);
+			cliente = new Cliente();
+			//Crear Mensaje
+			FacesMessage mensajeJSF = new FacesMessage();
+			mensajeJSF.setDetail(mensaje);
+			//Añadir el Mensaje
+			FacesContext.getCurrentInstance().addMessage(null, mensajeJSF);
 		} catch (Exception e) {
-			System.err.println("Error al guardar cliente:" + e.getMessage());
+			//Crear Mensaje
+			FacesMessage mensajeJSF = new FacesMessage();
+			mensajeJSF.setDetail("Error al guardar");
+			//Añadir el Mensaje
+			FacesContext.getCurrentInstance().addMessage(null, mensajeJSF);
 		}
 		return null; //Si se coloca null se queda en la misma página
 	}
