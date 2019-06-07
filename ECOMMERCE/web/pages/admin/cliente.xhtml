@@ -9,6 +9,10 @@
 
 <h:body>
 	<h:form>
+		<h:panelGrid columns="4">
+			<h:commandButton value="Nuevo" type="reset" />
+			<h:commandButton action="#{clienteBean.guardar}" value="Guardar" type="submit" />
+		</h:panelGrid>
 		<!-- Componente para organizar elementos -->
 		<h:panelGrid id="panGriDatCli" columns="4" border="1">
 			<h:outputLabel value="Nombre:" />
@@ -24,7 +28,9 @@
 				requiredMessage="Identificación requerido" maxlength="13" />
 
 			<h:outputLabel value="Fecha Nacimiento:" />
-			<h:inputText id="txtFecCli" value="#{clienteBean.cliente.fechaNacPer}" />
+			<h:inputText id="txtFecCli" value="#{clienteBean.cliente.fechaNacPer}">
+				<f:convertDateTime pattern="yyyy-MM-dd"/>
+			</h:inputText>
 
 			<h:outputLabel value="Dirección:" />
 			<h:inputTextarea id="txaDirCli" value="#{clienteBean.cliente.direccionPer}" required="true"
@@ -41,6 +47,8 @@
 			<h:outputLabel value="Couta:" />
 			<h:inputText id="txtCuoCli" value="#{clienteBean.cliente.cuotaVenCli}" />
 		</h:panelGrid>
+		<br></br>
+		<h:messages/>
 	</h:form>
 </h:body>
 </html>
