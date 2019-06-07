@@ -25,7 +25,9 @@
 
 			<h:outputLabel value="Identificación:" />
 			<h:inputText id="txtIdeCli" value="#{clienteBean.cliente.identificacionPer}" required="true"
-				requiredMessage="Identificación requerido" maxlength="13" />
+				requiredMessage="Identificación requerido" maxlength="13" validatorMessage="Identificación incorrecta">
+				<f:validateRegex pattern="[0-9]{10} | [0-9]{13}"></f:validateRegex>
+			</h:inputText>	
 
 			<h:outputLabel value="Fecha Nacimiento:" />
 			<h:inputText id="txtFecCli" value="#{clienteBean.cliente.fechaNacPer}">
@@ -42,13 +44,15 @@
 
 			<h:outputLabel value="Correo:" />
 			<h:inputText id="txtCorCli" value="#{clienteBean.cliente.correoPer}" required="true"
-				requiredMessage="Correo requerido" maxlength="45" />
+				requiredMessage="Correo requerido" maxlength="45" validatorMessage="Correo incorrecto">
+				<f:validateRegex pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"></f:validateRegex>
+			</h:inputText>	
 
 			<h:outputLabel value="Couta:" />
 			<h:inputText id="txtCuoCli" value="#{clienteBean.cliente.cuotaVenCli}" />
 		</h:panelGrid>
 		<br></br>
-		<h:messages/>
+		<h:messages style="color:red;"/>
 	</h:form>
 </h:body>
 </html>
