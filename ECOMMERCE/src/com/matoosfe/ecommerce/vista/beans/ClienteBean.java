@@ -25,10 +25,12 @@ public class ClienteBean {
 
 	private Cliente cliente;
 	private ClienteTrs adminCliente;
+	private String estiloMensaje;
 
 	public ClienteBean() {
 		this.cliente = new Cliente(); // Registro Vacio
 		this.adminCliente = new ClienteTrs();
+		this.estiloMensaje = "color:red;";
 	}
 
 	/**
@@ -44,7 +46,21 @@ public class ClienteBean {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
+
+	/**
+	 * @return the estiloMensaje
+	 */
+	public String getEstiloMensaje() {
+		return estiloMensaje;
+	}
+
+	/**
+	 * @param estiloMensaje the estiloMensaje to set
+	 */
+	public void setEstiloMensaje(String estiloMensaje) {
+		this.estiloMensaje = estiloMensaje;
+	}
+
 	/********************************
 	 * OPERACIONES en JSF
 	 *********************************/
@@ -52,20 +68,24 @@ public class ClienteBean {
 		try {
 			String mensaje = adminCliente.guardar(cliente);
 			cliente = new Cliente();
-			//Crear Mensaje
+			// Crear Mensaje
 			FacesMessage mensajeJSF = new FacesMessage();
 			mensajeJSF.setSeverity(FacesMessage.SEVERITY_INFO);
 			mensajeJSF.setSummary(mensaje);
-			//Añadir el Mensaje
+			//Cambiar el color
+			estiloMensaje = "color:negro;";
+			// Añadir el Mensaje
 			FacesContext.getCurrentInstance().addMessage(null, mensajeJSF);
 		} catch (Exception e) {
-			//Crear Mensaje
+			// Crear Mensaje
 			FacesMessage mensajeJSF = new FacesMessage();
 			mensajeJSF.setSeverity(FacesMessage.SEVERITY_ERROR);
 			mensajeJSF.setSummary("Error al guardar");
-			//Añadir el Mensaje
+			//Cambiar el color
+			estiloMensaje = "color:red;";
+			// Añadir el Mensaje
 			FacesContext.getCurrentInstance().addMessage(null, mensajeJSF);
 		}
-		return null; //Si se coloca null se queda en la misma página
+		return null; // Si se coloca null se queda en la misma página
 	}
 }

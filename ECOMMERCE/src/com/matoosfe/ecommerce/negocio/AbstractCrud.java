@@ -6,6 +6,7 @@ package com.matoosfe.ecommerce.negocio;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  * Clase genérica para las operaciones CRUD en hibernate
@@ -28,11 +29,19 @@ public abstract class AbstractCrud<T> {
 	 * @throws Exception
 	 */
 	public String guardar(T objeto) throws Exception {
-		String mensaje = null;
-		Session session = obtenerSesion();
-		session.beginTransaction();
-		session.save(objeto);
-		session.getTransaction().commit();
+		Transaction transaccion = null;
+		String mensaje = "Registro guardado correctamente";
+		try(Session session = obtenerSesion()){
+			transaccion = session.beginTransaction();
+			session.save(objeto);
+			transaccion.commit();
+		}catch(Exception e) {
+			transaccion.rollback();
+			mensaje = "Error al guardar";
+			throw new Exception(mensaje);
+		}
+		
+	
 		return mensaje;
 	}
 	
@@ -43,11 +52,17 @@ public abstract class AbstractCrud<T> {
 	 * @throws Exception
 	 */
 	public String actualizar(T objeto) throws Exception {
-		String mensaje = null;
-		Session session = obtenerSesion();
-		session.beginTransaction();
-		session.update(objeto);
-		session.getTransaction().commit();
+		Transaction transaccion = null;
+		String mensaje = "Registro actualizado correctamente";
+		try(Session session = obtenerSesion()){
+			transaccion = session.beginTransaction();
+			session.update(objeto);
+			transaccion.commit();
+		}catch(Exception e) {
+			transaccion.rollback();
+			mensaje = "Error al actualizar";
+			throw new Exception(mensaje);
+		}
 		return mensaje;
 	}
 	
@@ -58,24 +73,37 @@ public abstract class AbstractCrud<T> {
 	 * @throws Exception
 	 */
 	public String eliminar(T objeto) throws Exception {
-		String mensaje = null;
-		Session session = obtenerSesion();
-		session.beginTransaction();
-		session.delete(objeto);
-		session.getTransaction().commit();
+		Transaction transaccion = null;
+		String mensaje = "Registro eliminado correctamente";
+		try(Session session = obtenerSesion()){
+			transaccion = session.beginTransaction();
+			session.delete(objeto);
+			transaccion.commit();
+		}catch(Exception e) {
+			transaccion.rollback();
+			mensaje = "Error al eliminar";
+			throw new Exception(mensaje);
+		}
 		return mensaje;
 	}
 	
 	/**
 	 * Método para consultar todos los objetos
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<T> consultarTodos(){
-		Session session = obtenerSesion();
-		session.beginTransaction();
-		@SuppressWarnings("unchecked")
-		List<T> listaObjetos = session.createQuery( "from " + objeto.getSimpleName()).list();
-		session.getTransaction().commit();
+	@SuppressWarnings("unchecked")
+	public List<T> consultarTodos() throws Exception{
+		Transaction transaccion = null;
+		List<T> listaObjetos = null;
+		try(Session session = obtenerSesion()){
+			transaccion = session.beginTransaction();
+			listaObjetos = session.createQuery( "from " + objeto.getSimpleName()).list();
+			transaccion.commit();
+		}catch(Exception e) {
+			transaccion.rollback();
+			throw new Exception("Error al recuperar los registros");
+		}
 		return listaObjetos;
 	}
 
