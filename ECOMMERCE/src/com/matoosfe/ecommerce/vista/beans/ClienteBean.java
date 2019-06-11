@@ -54,13 +54,15 @@ public class ClienteBean {
 			cliente = new Cliente();
 			//Crear Mensaje
 			FacesMessage mensajeJSF = new FacesMessage();
-			mensajeJSF.setDetail(mensaje);
+			mensajeJSF.setSeverity(FacesMessage.SEVERITY_INFO);
+			mensajeJSF.setSummary(mensaje);
 			//Añadir el Mensaje
 			FacesContext.getCurrentInstance().addMessage(null, mensajeJSF);
 		} catch (Exception e) {
 			//Crear Mensaje
 			FacesMessage mensajeJSF = new FacesMessage();
-			mensajeJSF.setDetail("Error al guardar");
+			mensajeJSF.setSeverity(FacesMessage.SEVERITY_ERROR);
+			mensajeJSF.setSummary("Error al guardar");
 			//Añadir el Mensaje
 			FacesContext.getCurrentInstance().addMessage(null, mensajeJSF);
 		}

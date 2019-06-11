@@ -11,48 +11,65 @@
 	<h:form>
 		<h:panelGrid columns="4">
 			<h:commandButton value="Nuevo" type="reset" />
-			<h:commandButton action="#{clienteBean.guardar}" value="Guardar" type="submit" />
+			<h:commandButton action="#{clienteBean.guardar}" value="Guardar"
+				type="submit" />
 		</h:panelGrid>
 		<!-- Componente para organizar elementos -->
 		<h:panelGrid id="panGriDatCli" columns="4" border="1">
 			<h:outputLabel value="Nombre:" />
-			<h:inputText id="txtNomCli" value="#{clienteBean.cliente.nombrePer}" required="true"
-				requiredMessage="Nombre requerido" maxlength="25" />
+			<h:inputText id="txtNomCli" value="#{clienteBean.cliente.nombrePer}"
+				required="true" requiredMessage="Nombre requerido" maxlength="25">
+				<f:converter converterId="conMay" />
+			</h:inputText>
 
 			<h:outputLabel value="Apellido:" />
-			<h:inputText id="txtApeCli" value="#{clienteBean.cliente.apellidoPer}" required="true"
-				requiredMessage="Apellido requerido" maxlength="25" />
+			<h:inputText id="txtApeCli"
+				value="#{clienteBean.cliente.apellidoPer}" required="true"
+				requiredMessage="Apellido requerido" maxlength="25">
+				<f:converter converterId="conMay" />
+			</h:inputText>
 
 			<h:outputLabel value="Identificación:" />
-			<h:inputText id="txtIdeCli" value="#{clienteBean.cliente.identificacionPer}" required="true"
-				requiredMessage="Identificación requerido" maxlength="13" validatorMessage="Identificación incorrecta">
-				<f:validateRegex pattern="[0-9]{10} | [0-9]{13}"></f:validateRegex>
-			</h:inputText>	
+			<h:inputText id="txtIdeCli"
+				value="#{clienteBean.cliente.identificacionPer}" required="true"
+				requiredMessage="Identificación requerido" maxlength="13"
+				validatorMessage="Identificación incorrecta">
+				<f:validateRegex pattern="[0-9]{13}"></f:validateRegex>
+			</h:inputText>
 
 			<h:outputLabel value="Fecha Nacimiento:" />
-			<h:inputText id="txtFecCli" value="#{clienteBean.cliente.fechaNacPer}">
-				<f:convertDateTime pattern="yyyy-MM-dd"/>
+			<h:inputText id="txtFecCli"
+				value="#{clienteBean.cliente.fechaNacPer}">
+				<f:convertDateTime pattern="yyyy-MM-dd" />
 			</h:inputText>
 
 			<h:outputLabel value="Dirección:" />
-			<h:inputTextarea id="txaDirCli" value="#{clienteBean.cliente.direccionPer}" required="true"
-				requiredMessage="Dirección requerida" />
+			<h:inputTextarea id="txaDirCli"
+				value="#{clienteBean.cliente.direccionPer}" required="true"
+				requiredMessage="Dirección requerida">
+				<f:converter converterId="conMay" />
+			</h:inputTextarea>
 
 			<h:outputLabel value="Teléfono:" />
-			<h:inputText id="txtTelCli" value="#{clienteBean.cliente.telefonoPer}" required="true"
+			<h:inputText id="txtTelCli"
+				value="#{clienteBean.cliente.telefonoPer}" required="true"
 				requiredMessage="Teléfono requerido" maxlength="10" />
 
 			<h:outputLabel value="Correo:" />
-			<h:inputText id="txtCorCli" value="#{clienteBean.cliente.correoPer}" required="true"
-				requiredMessage="Correo requerido" maxlength="45" validatorMessage="Correo incorrecto">
+			<h:inputText id="txtCorCli" value="#{clienteBean.cliente.correoPer}"
+				required="true" requiredMessage="Correo requerido" maxlength="45"
+				validatorMessage="Correo incorrecto">
 				<f:validateRegex pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"></f:validateRegex>
-			</h:inputText>	
+			</h:inputText>
 
 			<h:outputLabel value="Couta:" />
-			<h:inputText id="txtCuoCli" value="#{clienteBean.cliente.cuotaVenCli}" />
+			<h:inputText id="txtCuoCli"
+				value="#{clienteBean.cliente.cuotaVenCli}">
+				<f:validator validatorId="valMonCli"/>
+			</h:inputText>
 		</h:panelGrid>
 		<br></br>
-		<h:messages style="color:red;"/>
+		<h:messages style="color:red;" />
 	</h:form>
 </h:body>
 </html>
