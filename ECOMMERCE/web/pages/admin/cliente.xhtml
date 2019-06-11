@@ -4,11 +4,16 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head></h:head>
+<h:head>
+	<h:outputStylesheet library="css" name="ecommerce.css"/>
+</h:head>
 
 
-<h:body>
+<h:body styleClass="bg_login">
 	<h:form>
+		<h:panelGrid columns="1" width="100%">
+			<h:graphicImage library="img" name="imgBannerEcommerce800x150.png" width="1000" height="200" />
+		</h:panelGrid>
 		<h:panelGrid columns="4">
 			<h:commandButton value="Nuevo" type="reset" />
 			<h:commandButton action="#{clienteBean.guardar}" value="Guardar"
@@ -65,7 +70,7 @@
 			<h:outputLabel value="Couta:" />
 			<h:inputText id="txtCuoCli"
 				value="#{clienteBean.cliente.cuotaVenCli}">
-				<f:validator validatorId="valMonCli"/>
+				<f:validator validatorId="valMonCli" />
 			</h:inputText>
 		</h:panelGrid>
 		<br></br>
