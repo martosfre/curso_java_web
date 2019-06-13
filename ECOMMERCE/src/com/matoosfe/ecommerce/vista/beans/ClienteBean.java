@@ -3,6 +3,9 @@
  */
 package com.matoosfe.ecommerce.vista.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -26,11 +29,14 @@ public class ClienteBean {
 	private Cliente cliente;
 	private ClienteTrs adminCliente;
 	private String estiloMensaje;
+	private List<Cliente> listaClientes;
 
 	public ClienteBean() {
 		this.cliente = new Cliente(); // Registro Vacio
 		this.adminCliente = new ClienteTrs();
 		this.estiloMensaje = "color:red;";
+		this.listaClientes = new ArrayList<>();
+		inicializarTabla();
 	}
 
 	/**
@@ -61,6 +67,20 @@ public class ClienteBean {
 		this.estiloMensaje = estiloMensaje;
 	}
 
+	/**
+	 * @return the listaClientes
+	 */
+	public List<Cliente> getListaClientes() {
+		return listaClientes;
+	}
+
+	/**
+	 * @param listaClientes the listaClientes to set
+	 */
+	public void setListaClientes(List<Cliente> listaClientes) {
+		this.listaClientes = listaClientes;
+	}
+
 	/********************************
 	 * OPERACIONES en JSF
 	 *********************************/
@@ -68,11 +88,12 @@ public class ClienteBean {
 		try {
 			String mensaje = adminCliente.guardar(cliente);
 			cliente = new Cliente();
+			inicializarTabla();
 			// Crear Mensaje
 			FacesMessage mensajeJSF = new FacesMessage();
 			mensajeJSF.setSeverity(FacesMessage.SEVERITY_INFO);
 			mensajeJSF.setSummary(mensaje);
-			//Cambiar el color
+			// Cambiar el color
 			estiloMensaje = "color:negro;";
 			// Añadir el Mensaje
 			FacesContext.getCurrentInstance().addMessage(null, mensajeJSF);
@@ -81,11 +102,30 @@ public class ClienteBean {
 			FacesMessage mensajeJSF = new FacesMessage();
 			mensajeJSF.setSeverity(FacesMessage.SEVERITY_ERROR);
 			mensajeJSF.setSummary("Error al guardar");
-			//Cambiar el color
+			// Cambiar el color
 			estiloMensaje = "color:red;";
 			// Añadir el Mensaje
 			FacesContext.getCurrentInstance().addMessage(null, mensajeJSF);
 		}
 		return null; // Si se coloca null se queda en la misma página
+	}
+
+	/**
+	 * Método para inicializar la tabla de clientes
+	 */
+	private void inicializarTabla() {
+		try {
+			this.listaClientes = adminCliente.consultarTodos();
+		} catch (Exception e) {
+			// Crear Mensaje
+			FacesMessage mensajeJSF = new FacesMessage();
+			mensajeJSF.setSeverity(FacesMessage.SEVERITY_ERROR);
+			mensajeJSF.setSummary("Error al consultar clientes");
+			// Cambiar el color
+			estiloMensaje = "color:red;";
+			// Añadir el Mensaje
+			FacesContext.getCurrentInstance().addMessage(null, mensajeJSF);
+		}
+
 	}
 }

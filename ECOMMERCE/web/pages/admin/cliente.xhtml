@@ -74,6 +74,32 @@
 			</h:inputText>
 		</h:panelGrid>
 		<br></br>
+		<h:dataTable id="datTabCli" value="#{clienteBean.listaClientes}" var="puntero" styleClass="estiloTabla">
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Identificación" />
+				</f:facet>
+				<h:outputLabel value="#{puntero.identificacionPer}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Nombre" />
+				</f:facet>
+					<h:outputLabel value="#{puntero.nombrePer}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Apellido" />
+				</f:facet>
+					<h:outputLabel value="#{puntero.apellidoPer}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Fecha Nacimiento" />
+				</f:facet>
+					<h:outputLabel value="#{puntero.fechaNacPer}" />
+			</h:column>
+		</h:dataTable>
 		<h:messages style="#{clienteBean.estiloMensaje}" />
 	</h:form>
 </h:body>
