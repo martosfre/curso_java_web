@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<h:outputStylesheet library="css" name="ecommerce.css" />
+</h:head>
+<h:body>
+	<h:form>
+		<h:panelGrid columns="1" width="100%">
+			<h:graphicImage library="img" name="imgBannerEcommerce800x150.png"
+				width="1000" height="200" />
+		</h:panelGrid>
+		<h:panelGrid columns="4" width="100%">
+			<h:commandLink action="producto" value="Producto" />
+			<h:commandLink action="cliente" value="Cliente" />
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>

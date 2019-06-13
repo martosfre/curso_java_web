@@ -55,7 +55,7 @@ public class ServletLogin extends HttpServlet {
 			//request.getRequestDispatcher("./bzx123").forward(request, response);
 			
 			//Redireccionar a una página JSP
-			request.getRequestDispatcher("./pages/menu.jsp").forward(request, response);
+			request.getRequestDispatcher("./pages/menu.mat").forward(request, response);
 			
 		}else {
 			//Mensaje Credenciales Incorrectas
