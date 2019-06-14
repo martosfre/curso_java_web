@@ -87,7 +87,12 @@ public class ClienteBean {
 	 *********************************/
 	public String guardar() {
 		try {
-			String mensaje = adminCliente.guardar(cliente);
+			String mensaje = null;
+			if (cliente.getIdCli() == 0) {
+				mensaje = adminCliente.guardar(cliente);
+			}else {
+				mensaje = adminCliente.actualizar(cliente);
+			}
 			cliente = new Cliente();
 			inicializarTabla();
 			// Crear Mensaje
@@ -110,26 +115,42 @@ public class ClienteBean {
 		}
 		return null; // Si se coloca null se queda en la misma página
 	}
-	
+
 	/**
 	 * Método para editar un registro
+	 * 
 	 * @return
 	 */
 	public String editar() {
-		/**********************************************************************
-		 * Recuperar parámetros
-		 * ********************************************************************/
-		FacesContext contextoJSF = FacesContext.getCurrentInstance();
-		ExternalContext contextoServlet = contextoJSF.getExternalContext();
-		Integer idCli = Integer.parseInt(contextoServlet.getRequestParameterMap().get("idCli"));
-		/******************************************************************************************/
-		System.out.println(idCli);
-		
+		try {
+			/**********************************************************************
+			 * Recuperar parámetros
+			 ********************************************************************/
+			FacesContext contextoJSF = FacesContext.getCurrentInstance();
+			ExternalContext contextoServlet = contextoJSF.getExternalContext();
+			Integer idCli = Integer.parseInt(contextoServlet.getRequestParameterMap().get("idCli"));
+			/******************************************************************************************/
+			// Recupero el Cliente y le asigno a la variable que representa el formulario de
+			// guardar
+			cliente = adminCliente.consultarPorId("idCli", idCli);
+
+		} catch (Exception e) {
+			// Crear Mensaje
+			FacesMessage mensajeJSF = new FacesMessage();
+			mensajeJSF.setSeverity(FacesMessage.SEVERITY_ERROR);
+			mensajeJSF.setSummary("Error al editar");
+			// Cambiar el color
+			estiloMensaje = "color:red;";
+			// Añadir el Mensaje
+			FacesContext.getCurrentInstance().addMessage(null, mensajeJSF);
+		}
+
 		return null;
 	}
-	
+
 	/**
 	 * Método para eliminar un registro
+	 * 
 	 * @return
 	 */
 	public String eliminar() {

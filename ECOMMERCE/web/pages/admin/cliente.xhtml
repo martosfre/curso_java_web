@@ -21,6 +21,8 @@
 				type="submit" />
 		</h:panelGrid>
 		<!-- Componente para organizar elementos -->
+		<!-- Es necesario para editar y actualizar el registro -->
+		<h:inputHidden value="#{clienteBean.cliente.idCli}" />
 		<h:panelGrid id="panGriDatCli" columns="4" border="1">
 			<h:outputLabel value="Nombre:" />
 			<h:inputText id="txtNomCli" value="#{clienteBean.cliente.nombrePer}"

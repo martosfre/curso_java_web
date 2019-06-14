@@ -7,6 +7,9 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import com.matoosfe.ecommerce.modelo.Cliente;
 
 /**
  * Clase genérica para las operaciones CRUD en hibernate
@@ -105,6 +108,23 @@ public abstract class AbstractCrud<T> {
 			throw new Exception("Error al recuperar los registros");
 		}
 		return listaObjetos;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public T consultarPorId(String atributoId, Integer id) throws Exception{
+		Transaction transaccion = null;
+		T objetoDev = null;
+		try(Session session = obtenerSesion()){
+			transaccion = session.beginTransaction();
+			Query<T> consulta = session.createQuery( "select alias from " + objeto.getSimpleName() + " alias where alias." + atributoId + "= :id");
+			consulta.setParameter("id", id);
+			objetoDev = (T) consulta.getSingleResult();
+			transaccion.commit();
+		}catch(Exception e) {
+			transaccion.rollback();
+			throw new Exception("Error al recuperar los registros");
+		}
+		return objetoDev;
 	}
 
 	public abstract Session obtenerSesion();
