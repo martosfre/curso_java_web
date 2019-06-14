@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<h:outputStylesheet library="css" name="ecommerce.css" />
@@ -17,8 +18,8 @@
 		</h:panelGrid>
 		<h:panelGrid columns="4">
 			<h:commandButton value="Nuevo" type="reset" />
-			<h:commandButton action="#{clienteBean.guardar}" value="Guardar"
-				type="submit" />
+			<p:commandButton action="#{clienteBean.guardar}" value="Guardar"
+				 ajax="false" />
 		</h:panelGrid>
 		<!-- Componente para organizar elementos -->
 		<!-- Es necesario para editar y actualizar el registro -->
@@ -116,8 +117,9 @@
 						<h:graphicImage library="img" name="iconoEdit32x32.png" width="" />
 						<f:param name="idCli" value="#{puntero.idCli}"></f:param>
 					</h:commandLink>
-					<h:commandLink action="#{clienteBean.eliminar}">
+					<h:commandLink action="#{clienteBean.eliminar}" onclick="return confirm('Esta seguro de eliminar el registro?')">
 						<h:graphicImage library="img" name="iconoEliminar32x32.png" />
+						<f:param name="idCli" value="#{puntero.idCli}"></f:param>
 					</h:commandLink>
 				</h:panelGrid>
 			</h:column>

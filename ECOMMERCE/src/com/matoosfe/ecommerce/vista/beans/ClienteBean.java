@@ -90,7 +90,7 @@ public class ClienteBean {
 			String mensaje = null;
 			if (cliente.getIdCli() == 0) {
 				mensaje = adminCliente.guardar(cliente);
-			}else {
+			} else {
 				mensaje = adminCliente.actualizar(cliente);
 			}
 			cliente = new Cliente();
@@ -154,6 +154,42 @@ public class ClienteBean {
 	 * @return
 	 */
 	public String eliminar() {
+		try {
+			/**********************************************************************
+			 * Recuperar parámetros
+			 ********************************************************************/
+			FacesContext contextoJSF = FacesContext.getCurrentInstance();
+			ExternalContext contextoServlet = contextoJSF.getExternalContext();
+			Integer idCli = Integer.parseInt(contextoServlet.getRequestParameterMap().get("idCli"));
+			/******************************************************************************************/
+			/*
+			 * Recupero el Cliente y le asigno a la variable que representa el formulario de
+			 * guardar
+			 */
+			// Eliminar
+			String mensaje = adminCliente.eliminar(adminCliente.consultarPorId("idCli", idCli));
+			inicializarTabla();
+
+			// Crear Mensaje
+			FacesMessage mensajeJSF = new FacesMessage();
+			mensajeJSF.setSeverity(FacesMessage.SEVERITY_INFO);
+			mensajeJSF.setSummary(mensaje);
+			// Cambiar el color
+			estiloMensaje = "color:negro;";
+			// Añadir el Mensaje
+			FacesContext.getCurrentInstance().addMessage(null, mensajeJSF);
+
+		} catch (Exception e) {
+			// Crear Mensaje
+			FacesMessage mensajeJSF = new FacesMessage();
+			mensajeJSF.setSeverity(FacesMessage.SEVERITY_ERROR);
+			mensajeJSF.setSummary("Error al editar");
+			// Cambiar el color
+			estiloMensaje = "color:red;";
+			// Añadir el Mensaje
+			FacesContext.getCurrentInstance().addMessage(null, mensajeJSF);
+		}
+
 		return null;
 	}
 
