@@ -5,14 +5,15 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-	<h:outputStylesheet library="css" name="ecommerce.css"/>
+	<h:outputStylesheet library="css" name="ecommerce.css" />
 </h:head>
 
 
 <h:body styleClass="bg_login">
 	<h:form>
 		<h:panelGrid columns="1" width="100%">
-			<h:graphicImage library="img" name="imgBannerEcommerce800x150.png" width="1000" height="200" />
+			<h:graphicImage library="img" name="imgBannerEcommerce800x150.png"
+				width="1000" height="200" />
 		</h:panelGrid>
 		<h:panelGrid columns="4">
 			<h:commandButton value="Nuevo" type="reset" />
@@ -74,7 +75,12 @@
 			</h:inputText>
 		</h:panelGrid>
 		<br></br>
-		<h:dataTable id="datTabCli" value="#{clienteBean.listaClientes}" var="puntero" styleClass="estiloTabla">
+		<h:messages style="#{clienteBean.estiloMensaje}" />
+	</h:form>
+	<h:form id="frmLisCli">
+		<h:dataTable id="datTabCli" border="1"
+			value="#{clienteBean.listaClientes}" var="puntero"
+			styleClass="estiloTabla">
 			<h:column>
 				<f:facet name="header">
 					<h:outputLabel value="Identificación" />
@@ -85,22 +91,35 @@
 				<f:facet name="header">
 					<h:outputLabel value="Nombre" />
 				</f:facet>
-					<h:outputLabel value="#{puntero.nombrePer}" />
+				<h:outputLabel value="#{puntero.nombrePer}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputLabel value="Apellido" />
 				</f:facet>
-					<h:outputLabel value="#{puntero.apellidoPer}" />
+				<h:outputLabel value="#{puntero.apellidoPer}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputLabel value="Fecha Nacimiento" />
 				</f:facet>
-					<h:outputLabel value="#{puntero.fechaNacPer}" />
+				<h:outputLabel value="#{puntero.fechaNacPer}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Operaciones" />
+				</f:facet>
+				<h:panelGrid columns="2">
+					<h:commandLink action="#{clienteBean.editar}">
+						<h:graphicImage library="img" name="iconoEdit32x32.png" width="" />
+						<f:param name="idCli" value="#{puntero.idCli}"></f:param>
+					</h:commandLink>
+					<h:commandLink action="#{clienteBean.eliminar}">
+						<h:graphicImage library="img" name="iconoEliminar32x32.png" />
+					</h:commandLink>
+				</h:panelGrid>
 			</h:column>
 		</h:dataTable>
-		<h:messages style="#{clienteBean.estiloMensaje}" />
 	</h:form>
 </h:body>
 </html>

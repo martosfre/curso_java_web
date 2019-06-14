@@ -9,6 +9,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.matoosfe.ecommerce.modelo.Cliente;
@@ -108,6 +109,31 @@ public class ClienteBean {
 			FacesContext.getCurrentInstance().addMessage(null, mensajeJSF);
 		}
 		return null; // Si se coloca null se queda en la misma página
+	}
+	
+	/**
+	 * Método para editar un registro
+	 * @return
+	 */
+	public String editar() {
+		/**********************************************************************
+		 * Recuperar parámetros
+		 * ********************************************************************/
+		FacesContext contextoJSF = FacesContext.getCurrentInstance();
+		ExternalContext contextoServlet = contextoJSF.getExternalContext();
+		Integer idCli = Integer.parseInt(contextoServlet.getRequestParameterMap().get("idCli"));
+		/******************************************************************************************/
+		System.out.println(idCli);
+		
+		return null;
+	}
+	
+	/**
+	 * Método para eliminar un registro
+	 * @return
+	 */
+	public String eliminar() {
+		return null;
 	}
 
 	/**
