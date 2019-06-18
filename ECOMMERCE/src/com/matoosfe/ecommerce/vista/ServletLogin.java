@@ -43,30 +43,34 @@ public class ServletLogin extends HttpServlet {
 		String nombreUsuario = request.getParameter("txtNomUsu"); //valor atributo name de su componente html
 		String claveUsuario = request.getParameter("ptxtClaUsu");
 		
-		//2. Procesar petición
-		UsuarioTrs adminUsu = new UsuarioTrs();
-		Usuario usu = adminUsu.validarUsuario(nombreUsuario, claveUsuario);
-		if(usu != null) {
-			//Almacena el usuario en sesión
-			HttpSession sesion = request.getSession();
-			sesion.setAttribute("usuario", usu);
-			
-			//Redirecciona a un Servlet para mostrar un  menu
-			//request.getRequestDispatcher("./bzx123").forward(request, response);
-			
-			//Redireccionar a una página JSP
-			request.getRequestDispatcher("./pages/menu.mat").forward(request, response);
-			
-		}else {
-			//Mensaje Credenciales Incorrectas
-			//1.Recuperar el escritor
-			PrintWriter escritor = response.getWriter();
-			//2.Setear el tipo de contenido
-			response.setContentType("text/html");//Si no se coloca va por defecto text/html
-			//3.Escribir contenido
-			escritor.print("<b><label>Credenciales Incorrectas!!!</label></b>");
-			//4.Cerrar el escritor
-			escritor.close();
+		try {
+			//2. Procesar petición
+			UsuarioTrs adminUsu = new UsuarioTrs();
+			Usuario usu = adminUsu.validarUsuario(nombreUsuario, claveUsuario);
+			if(usu != null) {
+				//Almacena el usuario en sesión
+				HttpSession sesion = request.getSession();
+				sesion.setAttribute("usuario", usu);
+				
+				//Redirecciona a un Servlet para mostrar un  menu
+				//request.getRequestDispatcher("./bzx123").forward(request, response);
+				
+				//Redireccionar a una página JSP
+				request.getRequestDispatcher("./pages/menu.mat").forward(request, response);
+				
+			}else {
+				//Mensaje Credenciales Incorrectas
+				//1.Recuperar el escritor
+				PrintWriter escritor = response.getWriter();
+				//2.Setear el tipo de contenido
+				response.setContentType("text/html");//Si no se coloca va por defecto text/html
+				//3.Escribir contenido
+				escritor.print("<b><label>Credenciales Incorrectas!!!</label></b>");
+				//4.Cerrar el escritor
+				escritor.close();
+			}
+		} catch (Exception e) {
+			System.err.println("Error al validar usuario.");
 		}
 	}
 	

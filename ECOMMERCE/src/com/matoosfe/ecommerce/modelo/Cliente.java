@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -39,6 +41,7 @@ public class Cliente implements java.io.Serializable {
 	private String correoPer;
 	private BigDecimal cuotaVenCli;
 	private Set<Factura> facturas = new HashSet<Factura>(0);
+	private TipoCliente tipoCliente;
 
 	public Cliente() {
 	}
@@ -165,5 +168,23 @@ public class Cliente implements java.io.Serializable {
 	public void setFacturas(Set<Factura> facturas) {
 		this.facturas = facturas;
 	}
+
+	/**
+	 * @return the tipoCliente
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_tipcli", nullable = false)
+	public TipoCliente getTipoCliente() {
+		return tipoCliente;
+	}
+
+	/**
+	 * @param tipoCliente the tipoCliente to set
+	 */
+	public void setTipoCliente(TipoCliente tipoCliente) {
+		this.tipoCliente = tipoCliente;
+	}
+	
+	
 
 }

@@ -19,12 +19,23 @@
 		<h:panelGrid columns="4">
 			<h:commandButton value="Nuevo" type="reset" />
 			<p:commandButton action="#{clienteBean.guardar}" value="Guardar"
-				 ajax="false" />
+				ajax="false" />
 		</h:panelGrid>
 		<!-- Componente para organizar elementos -->
 		<!-- Es necesario para editar y actualizar el registro -->
 		<h:inputHidden value="#{clienteBean.cliente.idCli}" />
 		<h:panelGrid id="panGriDatCli" columns="4" border="1">
+			<h:outputLabel value="Tipo Cliente:" />
+			<h:selectOneMenu value="#{clienteBean.cliente.tipoCliente.idTipcli}">
+				<f:selectItem itemLabel="Seleccione una opción" itemValue="0" />
+				<f:selectItem itemLabel="Natural" itemValue="1" />
+				<f:selectItem itemLabel="Jurídico" itemValue="2" />
+			</h:selectOneMenu>
+			
+			<h:outputLabel value="Tipo Cliente Bdd:" />
+			<h:selectOneMenu value="#{clienteBean.cliente.tipoCliente.idTipcli}">
+				<f:selectItems value="#{clienteBean.listaTiposClientes}" />
+			</h:selectOneMenu>
 			<h:outputLabel value="Nombre:" />
 			<h:inputText id="txtNomCli" value="#{clienteBean.cliente.nombrePer}"
 				required="true" requiredMessage="Nombre requerido" maxlength="25">
@@ -117,7 +128,8 @@
 						<h:graphicImage library="img" name="iconoEdit32x32.png" width="" />
 						<f:param name="idCli" value="#{puntero.idCli}"></f:param>
 					</h:commandLink>
-					<h:commandLink action="#{clienteBean.eliminar}" onclick="return confirm('Esta seguro de eliminar el registro?')">
+					<h:commandLink action="#{clienteBean.eliminar}"
+						onclick="return confirm('Esta seguro de eliminar el registro?')">
 						<h:graphicImage library="img" name="iconoEliminar32x32.png" />
 						<f:param name="idCli" value="#{puntero.idCli}"></f:param>
 					</h:commandLink>

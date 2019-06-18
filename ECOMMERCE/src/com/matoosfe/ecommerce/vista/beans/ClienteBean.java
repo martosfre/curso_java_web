@@ -11,9 +11,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 import com.matoosfe.ecommerce.modelo.Cliente;
+import com.matoosfe.ecommerce.modelo.TipoCliente;
 import com.matoosfe.ecommerce.negocio.ClienteTrs;
+import com.matoosfe.ecommerce.negocio.TipoClienteTrs;
 
 /**
  * Clase que permite administrar el formulario de cliente En esta clase se
@@ -29,14 +32,20 @@ public class ClienteBean {
 
 	private Cliente cliente;
 	private ClienteTrs adminCliente;
+	private TipoClienteTrs adminTipoCliente;
+
 	private String estiloMensaje;
 	private List<Cliente> listaClientes;
+	private List<SelectItem> listaTiposClientes;
 
 	public ClienteBean() {
 		this.cliente = new Cliente(); // Registro Vacio
+		this.cliente.setTipoCliente(new TipoCliente()); // Relación
 		this.adminCliente = new ClienteTrs();
+		this.adminTipoCliente = new TipoClienteTrs();
 		this.estiloMensaje = "color:red;";
 		this.listaClientes = new ArrayList<>();
+		this.listaTiposClientes = new ArrayList<>();
 		inicializarTabla();
 	}
 
@@ -80,6 +89,20 @@ public class ClienteBean {
 	 */
 	public void setListaClientes(List<Cliente> listaClientes) {
 		this.listaClientes = listaClientes;
+	}
+
+	/**
+	 * @return the listaTiposClientes
+	 */
+	public List<SelectItem> getListaTiposClientes() {
+		return listaTiposClientes;
+	}
+
+	/**
+	 * @param listaTiposClientes the listaTiposClientes to set
+	 */
+	public void setListaTiposClientes(List<SelectItem> listaTiposClientes) {
+		this.listaTiposClientes = listaTiposClientes;
 	}
 
 	/********************************
@@ -199,6 +222,9 @@ public class ClienteBean {
 	private void inicializarTabla() {
 		try {
 			this.listaClientes = adminCliente.consultarTodos();
+			for(TipoCliente tipCli:adminTipoCliente.consultarTodos()) {
+				this.listaTiposClientes.add(new SelectItem(tipCli.getIdTipcli(), tipCli.getNombreTipcli()));
+			}
 		} catch (Exception e) {
 			// Crear Mensaje
 			FacesMessage mensajeJSF = new FacesMessage();

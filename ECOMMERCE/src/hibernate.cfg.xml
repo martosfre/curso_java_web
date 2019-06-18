@@ -13,6 +13,7 @@
         <property name="hibernate.validator.apply_to_ddl">false</property>
         <mapping class="com.matoosfe.ecommerce.modelo.Proveedor"/>
         <mapping class="com.matoosfe.ecommerce.modelo.Usuario"/>
+         <mapping class="com.matoosfe.ecommerce.modelo.TipoCliente"/>
         <mapping class="com.matoosfe.ecommerce.modelo.Cliente"/>
         <mapping class="com.matoosfe.ecommerce.modelo.Producto"/>
         <mapping class="com.matoosfe.ecommerce.modelo.Factura"/>
