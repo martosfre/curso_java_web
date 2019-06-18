@@ -1,0 +1,30 @@
+Base de Datos Memoria -> JDBC -> ORM (Hibernate, EclipseLink, Datanucleos, TopLink) -> JPA
+
+JDBC
+- Una especificación de java que permite las operaciones DDL-> Estructura (Alter, Create, Drop) y DML-> Data(Select, Insert, update, Delete) 
+de una base de datos.
+- Desventajas
+	* Los errores solo se podian detectar en tiempo de ejecución no en compilación
+	* Tener experiencia SQL
+
+
+ORM (Object Relational Mapping)
+- Convertir o mapear un modelo Relacional a un modelo de Objetos basado en un API
+  * XML
+  * Anotaciones
+- Tres elementos
+  *Tabla -> Clase
+  *Columna -> Atributo
+  *Relaciones
+   1 a N   -> N en una List
+   1 a 1   -> 1 en un objeto
+   N a M   ->
+- Define las operaciones CRUD como métodos 
+   * insert .... -> save
+   * update ..... -> update
+   * delete ..... -> delete
+
+- Consultas
+  *HQL  -> SQL de Objetos
+  *Nativo
+  *Criteria Query
